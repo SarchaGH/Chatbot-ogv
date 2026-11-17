@@ -1,0 +1,122 @@
+/* ============================================
+   KATTA AI CHAT - THEME (alle farger bor HER)
+   ============================================
+
+   Dette er den ENESTE filen du trenger for å endre farger.
+   style.css bruker bare variablene herfra – ingen faste farger.
+
+   Tre lag:
+     1. PALETT      – rå farger (rød, blå ...). Endre/legg til her.
+     2. AKSENT      – hvilken palettfarge som er "primary" (data-accent)
+                      De lysere/mørkere variantene regnes ut automatisk.
+     3. MODUS       – mørk/lys bakgrunner og tekst (data-mode)
+
+   Ny fargetema på 3 steg:
+     a) legg til  --c-pink: #ec4899;           i PALETT
+     b) legg til  :root[data-accent="pink"] { --primary: var(--c-pink); }
+     c) legg til  .swatch[data-accent="pink"] { --swatch: var(--c-pink); }
+        og en knapp med data-accent="pink" i index.php
+   ============================================ */
+
+
+/* ---------- 1. PALETT ---------- */
+:root {
+    --c-red:    #f16363;
+    --c-blue:   #3b82f6;
+    --c-green:  #22c55e;
+    --c-purple: #8b5cf6;
+    --c-orange: #f97316;
+
+    --c-success: #22c55e;
+    --c-danger:  #ef4444;
+}
+
+
+/* ---------- 2. AKSENT: velg EN farge, resten regnes ut ---------- */
+:root,
+:root[data-accent="red"]    { --primary: var(--c-red); }
+:root[data-accent="blue"]   { --primary: var(--c-blue); }
+:root[data-accent="green"]  { --primary: var(--c-green); }
+:root[data-accent="purple"] { --primary: var(--c-purple); }
+:root[data-accent="orange"] { --primary: var(--c-orange); }
+
+:root {
+    --primary-light: color-mix(in srgb, var(--primary) 75%, white);
+    --primary-dark:  color-mix(in srgb, var(--primary) 82%, black);
+    --primary-bg:    color-mix(in srgb, var(--primary) 12%, transparent);
+    --on-primary:    #ffffff;   /* tekst/ikon oppå primærfargen */
+    --glow: color-mix(in srgb, var(--primary) 35%, transparent);   /* glød rundt ikoner */
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+}
+
+/* Runde fargeknapper i sidemenyen henter fargen fra paletten */
+.swatch[data-accent="red"]    { --swatch: var(--c-red); }
+.swatch[data-accent="blue"]   { --swatch: var(--c-blue); }
+.swatch[data-accent="green"]  { --swatch: var(--c-green); }
+.swatch[data-accent="purple"] { --swatch: var(--c-purple); }
+.swatch[data-accent="orange"] { --swatch: var(--c-orange); }
+
+
+/* ---------- 3. MODUS ---------- */
+
+/* Mørk (standard) */
+:root {
+    color-scheme: dark;        /* gir mørke rullefelt, nedtrekksmenyer og skjemaelementer */
+
+    --bg-main:      #0b0e14;   /* bakgrunn utenfor appen */
+    --bg-secondary: #10141c;   /* chat-bakgrunn */
+    --bg-card:      #161b26;   /* sidemeny, header, input-område */
+    --bg-input:     #1d2433;   /* tekstfelt og knapper */
+    --bg-code:      #0d1117;   /* kodeblokker i dokumentasjonen */
+
+    --text-primary:   #e9edf5;
+    --text-secondary: #9aa4b8;
+    --text-muted:     #6b7589;
+    --primary-text:   var(--primary-light);   /* aksentfarget TEKST på bakgrunnen */
+
+    --ai-bubble: #181e2b;
+    --border:    #252c3c;
+    --hover:     rgba(255, 255, 255, 0.05);   /* lett fargelag ved hover */
+
+    --code-bg:            rgba(0, 0, 0, 0.3);
+    --code-bg-on-primary: rgba(0, 0, 0, 0.25);   /* kode inni brukerboblen */
+    --overlay:  rgba(0, 0, 0, 0.5);
+    --nav-bg:   color-mix(in srgb, var(--bg-main) 92%, transparent);
+
+    --success:       var(--c-success);
+    --danger:        var(--c-danger);
+    --danger-text:   #fca5a5;
+    --danger-bg:     color-mix(in srgb, var(--c-danger) 12%, transparent);
+    --danger-border: color-mix(in srgb, var(--c-danger) 30%, transparent);
+
+    --shadow:    0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+}
+
+/* Lys */
+:root[data-mode="light"] {
+    color-scheme: light;
+
+    --bg-main:      #eceff5;
+    --bg-secondary: #f6f7fb;
+    --bg-card:      #ffffff;
+    --bg-input:     #eff1f6;
+
+    --text-primary:   #141a29;
+    --text-secondary: #4b5568;
+    --text-muted:     #7a8499;
+    --primary-text:   color-mix(in srgb, var(--primary) 72%, black);   /* mørkere = lesbar på lys bunn */
+
+    --ai-bubble: #ffffff;
+    --border:    #e1e5ee;
+    --hover:     rgba(15, 23, 42, 0.05);
+
+    --code-bg:  rgba(15, 23, 42, 0.08);
+    --overlay:  rgba(15, 23, 42, 0.45);
+    --nav-bg:   color-mix(in srgb, var(--bg-card) 92%, transparent);
+
+    --danger-text: #b91c1c;
+
+    --shadow:    0 4px 6px -1px rgba(15, 23, 42, 0.12);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.15);
+}
